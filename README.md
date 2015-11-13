@@ -1,2 +1,2 @@
 # ValueMap
-A container for Any objects
+A container for Poco::Any objects
