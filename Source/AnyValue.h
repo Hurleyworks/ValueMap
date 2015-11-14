@@ -7,7 +7,6 @@
 #include "Any.h"
 #include <unordered_map>
 
-template <class PROPERTY>
 class AnyValue
 {
 	typedef std::unordered_map<int, Poco::Any> ValueMap;
@@ -16,8 +15,8 @@ class AnyValue
 	 AnyValue() = default;
 	~AnyValue() = default;
 		
-	void addDefault(const PROPERTY & key, const Poco::Any & value) { map_.insert(std::make_pair(key, value)); }
-	void setValue(const PROPERTY & key, const Poco::Any & value)
+	void addDefault(const int key, const Poco::Any & value) { map_.insert(std::make_pair(key, value)); }
+	void setValue(const int key, const Poco::Any & value)
 	{
 		auto it = map_.find(key);
 		if (it == map_.end())
@@ -27,19 +26,19 @@ class AnyValue
 	}
 
 	template <typename T>
-	T & getRef(const PROPERTY & key) { return Poco::AnyCast<T>(getValue(key)); }
+	T & getRef(const int key) { return Poco::AnyCast<T>(getValue(key)); }
 
 	template <typename T>
-	T getVal(const PROPERTY & key) { return Poco::AnyCast<T>(getValue(key)); }
+	T getVal(const int key) { return Poco::AnyCast<T>(getValue(key)); }
 
 	template <typename T>
-	T* getPtr(const PROPERTY & key) { return Poco::AnyCast<T>(&getValue(key)); }
+	T* getPtr(const int key) { return Poco::AnyCast<T>(&getValue(key)); }
 
  private:
 	ValueMap map_;
 	Poco::Any empty_;
 
-	Poco::Any & getValue(const PROPERTY & key)
+	Poco::Any & getValue(const int key)
 	{
 		auto it = map_.find(key);
 		if (it != map_.end())

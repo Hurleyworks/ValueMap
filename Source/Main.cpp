@@ -52,8 +52,6 @@ struct Keys
 	const char* ToString() const { return KeysTable[value]; }
 };
 
-typedef AnyValue<Keys> Properties;
-
 
 int main (int argc, char* argv[])
 {
@@ -63,18 +61,18 @@ int main (int argc, char* argv[])
 	std::string s = "ten";
 	MyDataRef myData = MyData::create(i);
 
-	Properties props;
-	props.setValue(Keys::Float, f);
-	props.setValue(Keys::Double, d);
-	props.setValue(Keys::Int, i);
-	props.setValue(Keys::String, s);
-	props.setValue(Keys::MyData, myData);
+	AnyValue any;
+	any.setValue(Keys::Float, f);
+	any.setValue(Keys::Double, d);
+	any.setValue(Keys::Int, i);
+	any.setValue(Keys::String, s);
+	any.setValue(Keys::MyData, myData);
 
-	int intVal = props.getVal<int>(Keys::Int);
-	double doubleVal = props.getVal<double>(Keys::Double);
-	float floatVal = props.getVal<float>(Keys::Float);
-	std::string strVal = props.getVal<std::string>(Keys::String);
-	MyDataRef mine = props.getVal<MyDataRef>(Keys::MyData);
+	int intVal = any.getVal<int>(Keys::Int);
+	double doubleVal = any.getVal<double>(Keys::Double);
+	float floatVal = any.getVal<float>(Keys::Float);
+	std::string strVal = any.getVal<std::string>(Keys::String);
+	MyDataRef mine = any.getVal<MyDataRef>(Keys::MyData);
 
 	assert(intVal == i);
 	assert(doubleVal == d);
