@@ -14,8 +14,7 @@ class AnyValue
  public:
 	 AnyValue() = default;
 	~AnyValue() = default;
-		
-	void addDefault(const int key, const Poco::Any & value) { map_.insert(std::make_pair(key, value)); }
+	
 	void setValue(const int key, const Poco::Any & value)
 	{
 		auto it = map_.find(key);
